@@ -1,0 +1,38 @@
+if enabled then
+					void = Instance.new("Part",workspace)
+					void.Size = Vector3.new(9999,0.1,9999)
+					void.Position = Vector3.new(0,20,0)
+					void.Name = "void"
+					void.Transparency = 0.5
+					void.CanCollide = false
+					void.Anchored = true
+					void.Material = Enum.Material.Neon
+					void.BrickColor = BrickColor.new("Royal purple")
+					local pos
+					local function getnewpos()
+						repeat task.wait(0.2)
+							if lplr.Character.Humanoid.FloorMaterial ~= Enum.Material.Air and lplr.Character.Humanoid.FloorMaterial ~= Enum.Material.Neon then
+								pos = lplr.Character.PrimaryPart.CFrame
+								pos += Vector3.new(0,6,0)
+							end
+						until not modules.Antivoid["Toggled"]
+					end
+					coroutine.wrap(getnewpos)()
+					binds:BindPartToTouch(void,true,function()
+						if pos ~= nil then
+							workspace.Gravity = 0
+							local tween = game:GetService("TweenService"):Create(lplr.Character.PrimaryPart,TweenInfo.new(0.5,Enum.EasingStyle.Exponential),{CFrame = pos})
+							tween:Play()
+							task.wait(0.3)
+							tween:Cancel()
+							workspace.Gravity = 196.2
+						end
+					end)
+				else
+					binds:UnBindPartFromTouch(void or Instance.new("Part"))
+					pcall(function() void:Remove() end)
+					workspace.Gravity = 196.2
+				end
+			end,
+		})
+	end)
