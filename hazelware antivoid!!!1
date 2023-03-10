@@ -1,5 +1,4 @@
-if enabled then
-					void = Instance.new("Part",workspace)
+                     		void = Instance.new("Part",workspace)
 					void.Size = Vector3.new(9999,0.1,9999)
 					void.Position = Vector3.new(0,20,0)
 					void.Name = "void"
